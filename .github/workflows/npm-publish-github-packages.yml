@@ -6,10 +6,14 @@ name: Node.js Package
 on:
   release:
     types: [created]
+  workflow_dispatch:  # Add this line to enable manual triggers
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:      # Add permissions for the build job
+      contents: read
+      packages: read
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
