@@ -1,6 +1,9 @@
 {
-  "name": "test-package-prabakaran",
+  "name": "@prabakaranfresh/test-package-prabakaran",
   "version": "0.0.0",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
