@@ -19,8 +19,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: pnpm install
-      - run: pnpm build
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - run: npm install
+      - run: npm run build
 
   publish-gpr:
     needs: build
@@ -35,9 +38,12 @@ jobs:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
           scope: '@prabakaranfresh'  # Add this line with your GitHub username
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - run: |
           echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
-          npm ci
-          npm publish
+          pnpm install --frozen-lockfile
+          pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
